@@ -7,6 +7,7 @@ import static com.general.lneartao.lib.algorithm.Strings.addBinary;
 import static com.general.lneartao.lib.algorithm.Strings.isPalindrome;
 import static com.general.lneartao.lib.algorithm.Strings.leftRotateString;
 import static com.general.lneartao.lib.algorithm.Strings.lengthOfLastWord;
+import static com.general.lneartao.lib.algorithm.Strings.lengthOfLongestSubString;
 import static com.general.lneartao.lib.algorithm.Strings.longestPalindrome;
 import static com.general.lneartao.lib.algorithm.Strings.printAllPermutation;
 import static com.general.lneartao.lib.algorithm.Strings.reverseString;
@@ -32,7 +33,8 @@ public class TestStrings {
 //        testStrToInt();
 //        testReverseWords();
 //        testLongestPalindrome();
-        testAllPermutatuin();
+//        testAllPermutatuin();
+        testLengthOfLongestSubstring();
     }
 
     private static void testLeftRotateString() {
@@ -141,16 +143,28 @@ public class TestStrings {
         Logger.printl(strToInt("-21474836481")); // 1
     }
 
-    private static void testReverseWords(){
+    private static void testReverseWords() {
         Logger.printl(reverseWordsInSentence("Let's take LeetCode contest"));
     }
 
-    private static void testLongestPalindrome(){
+    private static void testLongestPalindrome() {
         Logger.printl(longestPalindrome("a"));
     }
 
-    private static void testAllPermutatuin(){
+    private static void testAllPermutatuin() {
 //        printAllPermutation("abc");
         printAllPermutation("12345");
+    }
+
+    private static void testLengthOfLongestSubstring() {
+        Logger.printl(lengthOfLongestSubString("abcabcbb")); //3
+        Logger.printl(lengthOfLongestSubString("bbbbb"));   //1
+        Logger.printl(lengthOfLongestSubString("pwwkew"));  //3
+        Logger.printl(lengthOfLongestSubString("a"));       //1
+        Logger.printl(lengthOfLongestSubString(""));        //0
+        Logger.printl(lengthOfLongestSubString("au"));      //2
+        Logger.printl(lengthOfLongestSubString("dvdf"));     //3
+        Logger.printl(lengthOfLongestSubString("aaadvdff")); //3
+        Logger.printl(lengthOfLongestSubString("aaadvdfef"));//4
     }
 }

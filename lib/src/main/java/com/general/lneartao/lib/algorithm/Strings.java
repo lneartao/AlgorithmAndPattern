@@ -3,8 +3,10 @@ package com.general.lneartao.lib.algorithm;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by lneartao on 2017/11/13.
@@ -382,6 +384,7 @@ public class Strings {
 
     /**
      * https://leetcode.com/problems/group-anagrams/
+     *
      * @param strs
      * @return
      */
@@ -642,13 +645,47 @@ public class Strings {
         // 把第(i+1)位到最后的部分翻转
         reverseString(perm, i + 1, num - 1);
         return true;
-    }
+    }/**/
 
     private static void swap(char[] perm, int a, int b) {
         char temp = perm[a];
         perm[a] = perm[b];
         perm[b] = temp;
     }
+
+    /**
+     * 没有重复字符的最长子串
+     * https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+     *
+     * @param s
+     * @return
+     */
+    public static int lengthOfLongestSubString(String s) {
+        int len = s.length();
+        Set<Character> set = new HashSet<>();
+        int result = 0, i = 0, j = 0;
+        while (i < len && j < len) {
+            if (!set.contains(s.charAt(j))) {
+                set.add(s.charAt(j++));
+                result = Math.max(result, j - i);
+            } else {
+                set.remove(s.charAt(i++));
+            }
+        }
+        return result;
+    }
+
+    public static int lengthOfLongestSubString2(String s) {
+        int n = s.length(), result = 0;
+        int[] index = new int[128];
+        for (int j = 0, i = 0; j < n; j++) {
+            i = Math.max(index[s.charAt(j)], i);
+            result = Math.max(result, j - i + 1);
+            index[s.charAt(j)] = j + 1;
+        }
+        return result;
+    }
+
 
     // null "" "   "  这这几种都算空字符串
     public static boolean isStringNull(String a) {

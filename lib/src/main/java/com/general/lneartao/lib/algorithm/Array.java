@@ -403,4 +403,25 @@ public class Array {
         return maxResult;
     }
 
+    /**
+     * 递增三元子序列
+     * https://leetcode.com/problems/increasing-triplet-subsequence/description/
+     * @param nums
+     * @return
+     */
+    public static boolean increasingTriplet(int[] nums) {
+        int x1 = Integer.MAX_VALUE;
+        int x2 = Integer.MAX_VALUE;
+        for (Integer x : nums) {
+            if (x <= x1) {
+                x1 = x;
+            } else if (x <= x2) {
+                x2 = x;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
