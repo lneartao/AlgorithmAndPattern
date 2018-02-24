@@ -1,7 +1,7 @@
 package com.general.lneartao.lib.test;
 
 import com.general.lneartao.lib.Logger;
-import com.general.lneartao.lib.algorithm.List;
+import com.general.lneartao.lib.algorithm.Lists;
 import com.general.lneartao.lib.algorithm.ListNode;
 
 import java.util.Random;
@@ -23,11 +23,11 @@ public class TestList {
         printListHead(headA);
         ListNode headB = createTestHead(7);
         printListHead(headB);
-        printListHead(new List().getIntersetionNode(headA, headB));
+        printListHead(new Lists().getIntersetionNode(headA, headB));
     }
 
     public static void testOddEvenList() {
-        List list = new List();
+        Lists list = new Lists();
         ListNode head = createTestHead(5);
         printListHead(head);
         printListHead(list.oddEvenList(head));

@@ -5,7 +5,7 @@ package com.general.lneartao.lib.algorithm;
  * @date 2018/2/6.
  */
 
-public class List {
+public class Lists {
 
     /**
      * 两个非空linked lists 加两数

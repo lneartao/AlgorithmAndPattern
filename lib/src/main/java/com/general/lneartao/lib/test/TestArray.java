@@ -57,13 +57,13 @@ public class TestArray {
         for (List<Integer> list : threeSum(new int[]{-1, 0, 1, 2, -1, -4})) {
             Logger.printl(list);
         }
-//        for(List<Integer> list:threeSum(new int[]{1,2})){
+//        for(Lists<Integer> list:threeSum(new int[]{1,2})){
 //            Logger.printl(list);
 //        }
         for (List<Integer> list : threeSum(new int[]{0, 0, 0, 0})) {
             Logger.printl(list);
         }
-//        for(List<Integer> list:threeSum(new int[]{-1,0,1,2,-1,-4})){
+//        for(Lists<Integer> list:threeSum(new int[]{-1,0,1,2,-1,-4})){
 //            Logger.printl(list);
 //        }
     }
