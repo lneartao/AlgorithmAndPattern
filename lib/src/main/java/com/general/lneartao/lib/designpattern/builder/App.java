@@ -3,6 +3,7 @@ package com.general.lneartao.lib.designpattern.builder;
 import com.general.lneartao.lib.Logger;
 
 /**
+ * 建造者模式
  * Created by lneartao on 2017/11/14.
  */
 

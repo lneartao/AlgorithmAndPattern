@@ -1,6 +1,7 @@
 package com.general.lneartao.lib.designpattern.command;
 
 /**
+ * 命令模式
  * Created by lneartao on 2017/11/30.
  */
 

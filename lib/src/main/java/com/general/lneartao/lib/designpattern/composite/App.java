@@ -3,6 +3,7 @@ package com.general.lneartao.lib.designpattern.composite;
 import com.general.lneartao.lib.Logger;
 
 /**
+ * 组合模式
  * Created by lneartao on 2017/11/21.
  */
 

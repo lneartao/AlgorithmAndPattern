@@ -323,4 +323,56 @@ public class Tree {
         }
         return -1;
     }
+
+    /**
+     * 完美二叉树的右连
+     * https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
+     * 时间复杂度O(n),空间复杂度O(log n)
+     *
+     * @param root 完美二叉树的根
+     */
+    public void connect(TreeLinkNode root) {
+        connect(root, null);
+    }
+
+    private void connect(TreeLinkNode root, TreeLinkNode sibling) {
+        if (root == null) {
+            return;
+        } else {
+            root.next = sibling;
+        }
+        connect(root.left, root.right);
+        if (sibling != null) {
+            connect(root.right, sibling.left);
+        } else {
+            connect(root.right, null);
+        }
+    }
+
+    /**
+     * 二叉搜索树第k小的值
+     * https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/
+     * 这里使用了中序遍历的方法
+     *
+     * @param root 二叉搜索树的根
+     * @param k
+     * @return 第k个最小的值
+     */
+    public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> s = new Stack<>();
+        TreeNode p = root;
+        while (!s.empty() || p != null) {
+            if (p != null) {
+                s.push(p);
+                p = p.left;
+            } else {
+                p = s.pop();
+                if (--k == 0) {
+                    return p.val;
+                }
+                p = p.right;
+            }
+        }
+        return -1;
+    }
 }

@@ -1,5 +1,13 @@
 package com.general.lneartao.lib.algorithm;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+
 /**
  * Created by lneartao on 2017/11/22.
  */
@@ -11,10 +19,12 @@ public class Sort {
 //        int[] reg = new int[arr.length];
 //        mergeSortRecursive(arr, reg, 0, arr.length);
 //        shellSort(arr);
-        quickSort(arr);
-        for (Integer s : arr) {
-            System.out.print(s + " ");
-        }
+//        quickSort(arr);
+//        for (Integer s : arr) {
+//            System.out.print(s + " ");
+//        }
+        int res = findKthLargets(new int[]{3, 2, 1, 5, 6, 4}, 2);
+        System.out.print(res);
     }
 
     /**
@@ -145,7 +155,7 @@ public class Sort {
         }
     }
 
-    private static void quickSelect(int[] arr, int left, int right, int target) {
+    private static int quickSelect(int[] arr, int left, int right, int target) {
         if (left + CUTOFF <= right) {
             int pivot = median3(arr, left, right);
             int i = left, j = right - 1;
@@ -161,13 +171,16 @@ public class Sort {
                 }
             }
             swap(arr, i, right - 1);
-            if (target <= i) {
-                quickSelect(arr, left, i - 1, target);
-            } else if (target > i + 1) {
-                quickSelect(arr, i + 1, right, target);
+            if (target < i) {
+                return quickSelect(arr, left, i - 1, target);
+            } else if (target > i) {
+                return quickSelect(arr, i + 1, right, target);
+            } else {
+                return arr[target];
             }
         } else {
             insertionSortV2(arr, left, right);
+            return arr[target];
         }
     }
 
@@ -316,4 +329,86 @@ public class Sort {
         arr[a] = arr[b];
         arr[b] = temp;
     }
+
+    /**
+     * https://leetcode.com/problems/top-k-frequent-elements/description/
+     * 时间复杂度是O(n*long(k))
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            int count = map.getOrDefault(num, 0);
+            map.put(num, count + 1);
+        }
+        PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>(new Comparator<Map.Entry<Integer, Integer>>() {
+            @Override
+            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+                return o1.getValue() - o2.getValue();
+            }
+        });
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            pq.offer(entry);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+        List<Integer> res = new LinkedList<>();
+        while (!pq.isEmpty()) {
+            res.add(0, pq.poll().getKey());
+        }
+        return res;
+    }
+
+    /**
+     * 桶排序，一种O(n)的解法
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public List<Integer> topKFrequentV2(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            int count = map.getOrDefault(num, 0);
+            map.put(num, count + 1);
+        }
+        List<Integer>[] bucket = new ArrayList[nums.length + 1];
+        for (Integer num : map.keySet()) {
+            int times = map.get(num);
+            if (bucket[times] == null) {
+                bucket[times] = new ArrayList<>();
+            }
+            bucket[times].add(num);
+        }
+        List<Integer> res = new LinkedList<>();
+        for (int i = bucket.length - 1; i >= 0; i--) {
+            if (bucket[i] != null) {
+                for (int j = 0; j < bucket[i].size(); j++) {
+                    res.add(bucket[i].get(j));
+                    if (res.size() >= k) {
+                        return res;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 寻找无序数组第K大的值
+     * https://leetcode.com/problems/kth-largest-element-in-an-array/description/
+     * 算法：使用了快速选择的算法，运用了三数中值分割法及小数组使用插入排序进行优化。（根据数据结构和算法分析的快排进行调整修改）
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public static int findKthLargets(int[] nums, int k) {
+        return quickSelect(nums, 0, nums.length - 1, nums.length - k);
+    }
+
 }

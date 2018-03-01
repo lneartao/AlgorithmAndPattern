@@ -3,6 +3,7 @@ package com.general.lneartao.lib.designpattern.decorator;
 import com.general.lneartao.lib.Logger;
 
 /**
+ * 装饰模式
  * Created by lneartao on 2017/11/15.
  */
 

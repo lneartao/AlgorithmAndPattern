@@ -1,6 +1,7 @@
 package com.general.lneartao.lib.designpattern.adapter;
 
 /**
+ * 适配器模式
  * Created by lneartao on 2017/11/13.
  */
 

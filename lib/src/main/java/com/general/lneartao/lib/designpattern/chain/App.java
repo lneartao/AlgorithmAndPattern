@@ -1,6 +1,7 @@
 package com.general.lneartao.lib.designpattern.chain;
 
 /**
+ * 责任链模式
  * Created by lneartao on 2017/11/29.
  */
 

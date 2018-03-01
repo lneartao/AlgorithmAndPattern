@@ -3,6 +3,7 @@ package com.general.lneartao.lib.designpattern.bridge;
 import com.general.lneartao.lib.Logger;
 
 /**
+ * 桥接模式
  * Created by lneartao on 2017/11/20.
  */
 

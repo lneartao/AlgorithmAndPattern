@@ -3,6 +3,7 @@ package com.general.lneartao.lib.designpattern.iterator;
 import com.general.lneartao.lib.Logger;
 
 /**
+ * 迭代器模式
  * Created by lneartao on 2017/11/28.
  */
 

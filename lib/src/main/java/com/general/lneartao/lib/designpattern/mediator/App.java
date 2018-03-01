@@ -1,6 +1,7 @@
 package com.general.lneartao.lib.designpattern.mediator;
 
 /**
+ * 中介模式
  * Created by lneartao on 2017/12/7.
  */
 

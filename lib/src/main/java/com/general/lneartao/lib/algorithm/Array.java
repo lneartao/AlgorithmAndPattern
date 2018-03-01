@@ -275,23 +275,24 @@ public class Array {
     /**
      * 现有N个红白蓝三种不同颜色的小球，乱序排列在一起，通过两两交换任意两个球，使得从左至右，依次是一些红球、白球和蓝球
      * 比如0代表红球，1代表白球，2代表蓝球
+     * https://leetcode.com/problems/sort-colors/description/
      * 算法：
      * current指针所指元素为0时，与start指针所指的元素交换，而后current++,begin++
      * current指针所指元素为1时，不做任何交换，current++
      * current指针所指元素为2时，与end指针所指元素交换，而后end--，current不变
      *
-     * @param arr 数组
+     * @param nums 数组
      */
-    public static void sortDutchFlag(int[] arr) {
-        if (arr == null || arr.length == 0) {
+    public static void sortDutchFlag(int[] nums) {
+        if (nums == null || nums.length == 0) {
             return;
         }
-        int start = 0, current = 0, end = arr.length - 1;
-        while (current <= end) {
-            if (arr[current] == 0) {
-                swap(arr, start++, current++);
-            } else if (arr[current] == 2) {
-                swap(arr, current, end--);
+        int red = 0, current = 0, blue = nums.length - 1;
+        while (current <= blue) {
+            if (nums[current] == 0) {
+                swap(nums, red++, current++);
+            } else if (nums[current] == 2) {
+                swap(nums, current, blue--);
             } else {
                 current++;
             }
@@ -406,6 +407,7 @@ public class Array {
     /**
      * 递增三元子序列
      * https://leetcode.com/problems/increasing-triplet-subsequence/description/
+     *
      * @param nums
      * @return
      */

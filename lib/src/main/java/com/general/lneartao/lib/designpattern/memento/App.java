@@ -5,6 +5,7 @@ import com.general.lneartao.lib.Logger;
 import java.util.Stack;
 
 /**
+ * 备忘录模式
  * Created by lneartao on 2017/12/1.
  */
 
