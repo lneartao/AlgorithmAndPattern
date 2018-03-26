@@ -5,6 +5,7 @@ import com.general.lneartao.lib.designpattern.observer.generic.GOrcs;
 import com.general.lneartao.lib.designpattern.observer.generic.GWeather;
 
 /**
+ * 观察者模式
  * Created by lneartao on 2017/11/27.
  */
 

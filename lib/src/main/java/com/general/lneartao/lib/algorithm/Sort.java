@@ -411,4 +411,21 @@ public class Sort {
         return quickSelect(nums, 0, nums.length - 1, nums.length - k);
     }
 
+    /**
+     * https://leetcode.com/problems/find-peak-element/description/
+     * 算法：其实理解它的内涵的话编程就很容易了，实际是只能上山，下山的情况出现就表明出现了peak值
+     *
+     * @param nums
+     * @return
+     */
+    public static int findPeakElement(int[] nums) {
+        int i = 0, len = nums.length;
+        for (; i < len - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                return i;
+            }
+        }
+        return len - 1;
+    }
+
 }
