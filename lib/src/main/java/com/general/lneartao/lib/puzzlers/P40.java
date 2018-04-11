@@ -9,6 +9,7 @@ import com.general.lneartao.lib.Logger;
  * @date 2018/4/2.
  */
 public class P40 {
+    // 这句是造成无限递归的代码～
     private P40 internalInstance = new P40();
 
     public P40() throws Exception {

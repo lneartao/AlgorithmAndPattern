@@ -5,7 +5,7 @@ import com.general.lneartao.lib.Logger;
 import java.util.Calendar;
 
 /**
- * 这里遇到的问题是类初始化的顺序引起的问题
+ * 这里遇到是类初始化的顺序引起的问题
  * final类型的域只有在其初始化表达式是常量表达式时才是常量，所以CURRENT_YEAR不是常量
  *
  * @author lneartao

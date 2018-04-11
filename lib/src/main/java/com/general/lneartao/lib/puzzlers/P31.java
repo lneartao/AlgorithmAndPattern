@@ -1,7 +1,7 @@
 package com.general.lneartao.lib.puzzlers;
 
 /**
- * 这里还是宽窄数据类型自动转换的问题
+ * 这里还是宽窄数据类型自动转换的问题，原因在于-1的补码在转换类型的时候出现的问题
  * Java是否应该禁止在short、byte和char变量上使用复合赋值操作符
  *
  * @author lneartao

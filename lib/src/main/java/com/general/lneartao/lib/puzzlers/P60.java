@@ -34,7 +34,7 @@ public class P60 {
 
     /**
      * 它接受两个int数值，并在第一个数值与第二个数值以二进制补码形式进行比较时，具有更多的位被置位时，返回true
-     * Java5后添加了一整套位操作的方法，比如,rotateLeft, reverseBytes, highestOneBit方法等等
+     * Java5后添加了一整套位操作的方法，比如: rotateLeft, reverseBytes, highestOneBit方法等等
      *
      * @param i
      * @param j

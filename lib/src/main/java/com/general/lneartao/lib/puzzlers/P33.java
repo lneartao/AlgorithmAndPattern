@@ -2,6 +2,7 @@ package com.general.lneartao.lib.puzzlers;
 
 /**
  * 原因是，Java使用2的补码的算术运算，它是非对称的。
+ * 因此，MIN_VALUE的取反也是它自己
  *
  * @author lneartao
  * @date 2018/4/2.

@@ -12,6 +12,7 @@ package com.general.lneartao.lib.puzzlers.p43;
 public class Thrower {
     private static Throwable t;
 
+    // 这个就是空构造器所抛出的异常，它就绕开了编译器的异常检查
     private Thrower() throws Throwable {
         throw t;
     }
@@ -27,5 +28,9 @@ public class Thrower {
         } finally {
             Thrower.t = null; // Avoid memory leak
         }
+    }
+
+    public static void main(String[] args) {
+        Thrower.sneakyThrow(new Throwable());
     }
 }

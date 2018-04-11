@@ -32,6 +32,10 @@ public class Logger {
         System.out.println(x);
     }
 
+    public static void printl(Object x) {
+        System.out.println(x);
+    }
+
     public static void printl(int[] x) {
         for (Integer num : x) {
             System.out.print(num);

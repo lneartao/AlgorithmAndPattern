@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 为了允许Hashset、HashTable等hash集合能添加处理自定义类不出问题，当你重写equals方法时，一定要记得重写hashCode方法
+ * 为了允许HashSet、HashTable等hash集合能添加处理自定义类不出问题，当你重写equals方法时，一定要记得重写hashCode方法
  *
  * @author lneartao
  * @date 2018/4/9.
