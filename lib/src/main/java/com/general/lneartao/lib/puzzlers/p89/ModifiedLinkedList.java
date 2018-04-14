@@ -13,31 +13,30 @@ import com.general.lneartao.lib.Logger;
  * @date 2018/4/11.
  */
 public class ModifiedLinkedList<E> {
-    private Node head = null;
+    private Node<E> head = null;
 
-    private class Node {
-        E value;
-        Node next;
+    private static class Node<T> {
+        T value;
+        Node<T> next;
 
-        public Node(E value) {
+        public Node(T value, Node<T> next) {
             this.value = value;
-            this.next = head;
-            head = this;
+            this.next = next;
         }
     }
 
     public void add(E e) {
-        new Node(e);
+        head = new Node<>(e, head);
     }
 
     public void dump() {
-        for (Node n = head; n != null; n = n.next) {
+        for (Node<E> n = head; n != null; n = n.next) {
             Logger.printl(n.value);
         }
     }
 
     public static void main(String[] args) {
-        LinkedList<String> list = new LinkedList<>();
+        ModifiedLinkedList<String> list = new ModifiedLinkedList<>();
         list.add("world");
         list.add("hello");
         list.dump();

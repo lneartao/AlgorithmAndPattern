@@ -8,8 +8,17 @@ public class Words {
     private Words() {
     }
 
-    public static final String FIRST = "physics";
-    public static final String SECOND = "chemistry";
-    public static final String THIRD = "biology";
+    /**
+     * change to "physics"
+     */
+    public static final String FIRST = "the";
+    /**
+     * change to "chemistry"
+     */
+    public static final String SECOND = null;
+    /**
+     * change to "biology"
+     */
+    public static final String THIRD = "set";
 
 }
