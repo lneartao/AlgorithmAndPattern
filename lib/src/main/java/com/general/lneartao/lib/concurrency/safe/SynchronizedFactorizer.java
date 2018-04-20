@@ -8,6 +8,7 @@ import java.math.BigInteger;
 /**
  * 本书中建议不要这么写，原因是性能问题
  * 但是据说现在的JVM都已经优化过synchronized，所以现在这似乎是一种可行的写法
+ * {@link CacheFactorizer}
  *
  * @author lneartao
  * @date 2018/4/12.

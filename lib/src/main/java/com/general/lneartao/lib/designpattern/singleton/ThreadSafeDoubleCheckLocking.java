@@ -20,7 +20,7 @@ public class ThreadSafeDoubleCheckLocking {
             synchronized (ThreadSafeDoubleCheckLocking.class) {
                 result = INSTANCE;
                 if (result == null) {
-                    result = new ThreadSafeDoubleCheckLocking();
+                    INSTANCE = result = new ThreadSafeDoubleCheckLocking();
                 }
             }
         }

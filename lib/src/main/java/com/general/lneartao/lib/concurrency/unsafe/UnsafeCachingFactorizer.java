@@ -9,6 +9,8 @@ import java.util.concurrent.atomic.AtomicReference;
  * 要保持状态一致性，就需要在单个原子操作中更新所有相关的状态变量
  * 这里产生错误的原因在于：这两个变量无法同时更新，那么在这两次修改操作之间，其他线程将发现不变性条件被破坏了
  * （Atomic类在对单一域修改的同步中较好用～）
+ * {@link com.general.lneartao.lib.concurrency.safe.SynchronizedFactorizer}
+ * {@link com.general.lneartao.lib.concurrency.safe.CacheFactorizer}
  *
  * @author lneartao
  * @date 2018/4/12.
