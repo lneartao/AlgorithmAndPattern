@@ -60,9 +60,17 @@ import com.general.lneartao.lib.concurrency.unsafe.UnsafeCachingFactorizer;
  * 31、必须对所有共享容器迭代的地方加锁(也可以复制容器进行迭代)；隐藏迭代器 {@link com.general.lneartao.lib.concurrency.unsafe.HiddenIterator}
  * 32、同步容器类（Collections类中的synchronized各种）和并发容器类（java.util.concurrent包中的类）的区别~ 同步容器将所有对容器状态的访问都串行化，以实现它们的线程安全性，
  * 但是这种代价是严重降低并发性，当多个线程竞争容器的锁时，吞吐量将严重降低。因此，最好用并发容器来替代同步容器，可以极大地提高伸缩性并降低风险
- * 33、ConcurrentHashMap不能被加锁来执行独占访问，因此我们无法使用客户端加锁来创建新的原子操作（别的并发容器也一样？，并发容器不适用于扩展功能？）
+ * 33、ConcurrentHashMap不能被加锁来执行独占访问，因此我们无法使用客户端加锁来创建新的原子操作（别的并发容器也一样？，并发容器不适用于扩展功能？）。
+ * 使用的是分段锁机制，缺陷是size和isEmpty的语义被弱化了以反映容器的并发特性，所以它们返回的结果在计算时可能已经过期了。
  * 34、CopyOnWriteArrayList的安全保证在于每次修改时，都会创建并重新发布一个新的容器副本，该容器的迭代器保留一个指向底层基础数组的引用。（缺点：每次修改都会复制底层数组）
+ * 35、阻塞方法和中断方法，当Thread抛出InterruptedException时的处理方法：1、传递给方法的调用者，恢复中断
+ * 36、同步工具类：
+ * 闭锁 CountDownLatch {@link com.general.lneartao.lib.concurrency.ohter.TestHarness}
+ * FutureTask {@link com.general.lneartao.lib.concurrency.ohter.Preloader}
+ * 信号量（可用于实现资源池）{@link com.general.lneartao.lib.concurrency.ohter.BoundedHashSet}
+ * 栅栏 {@link com.general.lneartao.lib.concurrency.ohter.CellularAutomata}
  * <p>
+ * p94
  *
  * @author lneartao
  * @date 2018/4/12.

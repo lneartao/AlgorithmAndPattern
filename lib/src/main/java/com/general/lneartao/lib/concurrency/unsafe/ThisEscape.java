@@ -15,12 +15,7 @@ package com.general.lneartao.lib.concurrency.unsafe;
 public class ThisEscape {
 
     public ThisEscape(EventSource source) {
-        source.registerListener(new EventListener() {
-            @Override
-            public void onEvent(Event e) {
-                doSomething(e);
-            }
-        });
+        source.registerListener(this::doSomething);
     }
 
     void doSomething(Event e) {

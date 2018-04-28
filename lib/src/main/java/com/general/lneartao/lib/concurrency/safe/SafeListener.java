@@ -13,12 +13,7 @@ public class SafeListener {
     private final EventListener listener;
 
     private SafeListener() {
-        listener = new EventListener() {
-            @Override
-            public void onEvent(Event e) {
-                doSomething(e);
-            }
-        };
+        listener = this::doSomething;
     }
 
     public static SafeListener getInstance(EventSource source) {
