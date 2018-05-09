@@ -1,5 +1,6 @@
 package com.general.lneartao.lib.concurrency;
 
+import com.general.lneartao.lib.concurrency.ohter.DynamicOrderDeadlock;
 import com.general.lneartao.lib.concurrency.safe.CountingFactorizer;
 import com.general.lneartao.lib.concurrency.safe.SynchronizedFactorizer;
 import com.general.lneartao.lib.concurrency.unsafe.LazyInitRace;
@@ -69,8 +70,131 @@ import com.general.lneartao.lib.concurrency.unsafe.UnsafeCachingFactorizer;
  * FutureTask {@link com.general.lneartao.lib.concurrency.ohter.Preloader}
  * 信号量（可用于实现资源池）{@link com.general.lneartao.lib.concurrency.ohter.BoundedHashSet}
  * 栅栏 {@link com.general.lneartao.lib.concurrency.ohter.CellularAutomata}
- * <p>
- * p94
+ * 37、在线程中执行任务
+ * {@link com.general.lneartao.lib.concurrency.ohter.SingleThreadWebServer}
+ * {@link com.general.lneartao.lib.concurrency.ohter.ThreadPerTaskWebServer}
+ * 38、Executor 的四个生命周期：创建、提交、开始和完成。已提交但尚未开始的任务可以取消，但那些已经开始执行的任务，只有当它们响应中断时，才能取消
+ * {@link com.general.lneartao.lib.concurrency.ohter.TaskExecutionWebServer}
+ * {@link com.general.lneartao.lib.concurrency.ohter.LifecycleWebServer}
+ * 39、Runnable是一种有很大局限的抽象，虽然run能写入到日志文件或将结果放入某个共享的数据结构，但它不能返回一个值或抛出一个受检查的异常。
+ * 所以可以用Callable，一种更好的抽象，还有Future，他表示了一个任务的生命周期，并提供了相应的方法。
+ * {@link com.general.lneartao.lib.concurrency.ohter.SingleThreadRenderer}
+ * {@link com.general.lneartao.lib.concurrency.ohter.FutureRenderer}
+ * {@link com.general.lneartao.lib.concurrency.ohter.Renderer}
+ * 40、Java没有提供任何机制来安全地终止线程，（包括stop(), suspend()），但它提供了中断(interruption)
+ * 41、任务取消：外部代码能在某个操作正常完成之前将其置入“完成”状态。一种协作机制是设置某个“已请求取消”标志位，并定期查看。
+ * {@link com.general.lneartao.lib.concurrency.ohter.BrokenPrimeProducer}
+ * {@link com.general.lneartao.lib.concurrency.safe.PrimeGenerator}
+ * 42、调用interrupt并不意味着立即停止目标线程正在进行的工作，而只是传递了请求中断的消息，然后由线程在下一个合适的时刻中断自己。
+ * {@link com.general.lneartao.lib.concurrency.ohter.PrimeProducer}
+ * 43、由于每个线程拥有各自的中断策略，因此除非你知道中断对该线程的含义，否则就不应该中断这个线程。
+ * 44、响应中断：传递异常，从而使你的方法也成为可中断的阻塞方法；恢复中断状态，让调用栈的上层代码能对其处理。
+ * 45、当Future.get()抛出InterruptedException或TimeoutException时，如果你知道不再需要结果，那么就可以调用Future.cancel来取消任务
+ * 46、处理不可中断的阻塞，如java.io包中的Socket I/O，和同步I/O，Selector的异步I/O。
+ * {@link com.general.lneartao.lib.concurrency.ohter.ReaderThread}
+ * {@link com.general.lneartao.lib.concurrency.ohter.SocketUsingTask}
+ * 47、对于持有线程的服务，只要服务的存在时间大于创建线程的方法的存在时间，那么就应该提供生命周期方法
+ * {@link com.general.lneartao.lib.concurrency.ohter.LogWriter}
+ * {@link com.general.lneartao.lib.concurrency.ohter.LogService}
+ * 48、毒丸对象：指一个放在队列上的对象，当得到这个对象时，立即停止！（用于生产者和消费者的数量都已知的情况下）
+ * {@link com.general.lneartao.lib.concurrency.ohter.IndexingService}
+ * 49、JVM关闭：正常和强行关闭。关闭钩子是指通过Runtime.addShutdownHook()注册的但尚未开始的线程，这些线程是并发的。
+ * 如果是强行关闭，不会运行关闭钩子。关闭钩子应该是线程安全的，在访问共享数据时必须使用同步机制，并且小心地避免死锁。可用于实现服务的清理工作。
+ * {@link com.general.lneartao.lib.concurrency.ohter.LogService}
+ * 50、守护线程和普通线程，在JVM启动时创建的所有线程中，除了主线程，其他都是守护线程，当创建一个新线程时，新线程将继承创建它的线程的守护状态。
+ * 51、任务与执行策略之间的隐形耦合：依赖性任务、使用线程封闭机制的任务、对响应时间敏感的任务、使用ThreadLocal的任务
+ * 52、线程饥饿死锁：所有正在执行任务的线程都由于等待其他仍处于工作队列中的任务而阻塞。
+ * 每当提交一个有依赖性的Executor任务时，要清楚地知道可能会出现线程“饥饿”死锁，因此需要在代码或配置Executor的配置文件中记录线程池大小或配置限制
+ * {@link com.general.lneartao.lib.concurrency.ohter.ThreadDeadlock}
+ * 53、基本的任务排队方法有三种：无界队列、有界队列和同步移交。有界队列满了以后，饱和策略开始发挥作用
+ * 54、饱和策略：AbortPolicy（抛出未检查的RejectedExecutionException）, CallerRunPolicy（不抛弃任务，也不抛出异常，而是将任务回退给调用者）,
+ * DiscardPolicy（悄悄抛弃任务）和DiscardOldestPolicy。
+ * 55、扩展ThreadPoolExecutor，有beforeExecute()（抛出一个RuntimeException，后续都不执行）,
+ * afterExecute()（除非任务完成后有Error，否则都会执行）, terminated()
+ * {@link com.general.lneartao.lib.concurrency.ohter.TimingThreadPool}
+ * 56、死锁：哲学家问题
+ * 锁顺序死锁：两个线程试图以不同顺序来获得相同的锁。所有线程应该以固定的顺序来获得锁，那么就能避免出现锁顺序死锁问题
+ * {@link com.general.lneartao.lib.concurrency.ohter.LeftRightDeadlock}
+ * 动态的锁顺序死锁：
+ * {@link DynamicOrderDeadlock}
+ * 在协作对象之间发生的死锁：如果在持有锁时调用某个外部方法，那么将出现活跃性问题。在这个外部方法中可能会获取其他锁（这可能会产生死锁）
+ * 或者阻塞时间过长，导致其他线程无法及时获得当前被持有的锁。
+ * {@link com.general.lneartao.lib.concurrency.ohter.car.TaxiLocked}
+ * 开放调用：在调用某个方法时不需要持有锁。
+ * {@link com.general.lneartao.lib.concurrency.ohter.car.Taxi}
+ * 资源死锁：多个线程互相持有彼此正在等待的锁而又不释放自己已持有的锁时会发生死锁。
+ * 57、死锁的避免和诊断
+ * 支持定时的锁：tryLock()替代内置锁，即通过this进行锁定
+ * 通过线程转存信息来分析死锁(Thread Dump)
+ * 58、其他活跃性危险
+ * 饥饿：当线程由于无法访问它所需要的资源而不能继续执行时，就发生了饥饿。(Starvation)
+ * 糟糕的响应性
+ * 活锁：不会阻塞，但也不能继续执行，因为线程将不断重复执行相同的操作，而且总会失败。
+ * 59、可伸缩性：当增加计算资源（CPU、内存、存储容量或I/O带宽），程序的吞吐量或者处理能力能相应地增加
+ * 60、Amdahl定律：在增加计算资源的情况下，程序在理论上能够实现最高加速比，这个值取决于程序中可并行组件与串行组件所占的比重。
+ * Speedup <= 1/(F+(1-F)/N)；F是必须被串行执行的部分，N是N个处理器
+ * 61、在所有并发程序中都包含一些串行部分，如果你认为你的程序中不存在串行部分，那么可以再仔细检查一遍。
+ * {@link com.general.lneartao.lib.concurrency.ohter.WorkerThread}
+ * 62、线程引入的开销：
+ * 上下文切换
+ * 内存同步
+ * 阻塞，（自旋等待：指通过循环不断地尝试获取锁，直到成功）
+ * 63、在并发程序中，对可伸缩性的最主要威胁就是独占方式的资源锁
+ * 64、三种方法降低锁的竞争程度：
+ * 减少锁的持有时间
+ * 降低锁的请求频率
+ * 使用带有协调机制的独占，这些机制允许更高的并发性
+ * 65、缩小锁的范围（快进快出）
+ * {@link com.general.lneartao.lib.concurrency.safe.AttributeStore}
+ * {@link com.general.lneartao.lib.concurrency.safe.BetterAttributeStore}
+ * 66、减小锁的粒度，通过锁分解和锁分段等技术实现
+ * {@link com.general.lneartao.lib.concurrency.safe.ServerStatusBeforeSplit}
+ * {@link com.general.lneartao.lib.concurrency.safe.ServerStatusAfterSplit}
+ * {@link com.general.lneartao.lib.concurrency.safe.StripedMap}
+ * 67、避免热点域：参看ConcurrentHashMap的size()方法中的分段独立计数
+ * 68、ReadWriteLock实现了一种在多个读取操作以及单个写入操作情况下的加锁规则：如果多个读取操作都不会修改共享资源，
+ * 那么这些读取操作可以同时访问该共享资源，但在执行写入操作时必须以独占方式来获取锁。
+ * 69、并发测试将大致分为安全性测试和活跃性测试。
+ * {@link com.general.lneartao.lib.concurrency.test.SemaphoreBoundedBuffer}
+ * 70、ReentrantLock实现了Lock接口，并提供了和synchronized相同的互斥性和内存可见性，还提供了可重入的加锁语义。
+ * 71、Lock或ReentrantLock都必须在Finally块中释放锁，否则当抛出异常后，那么这个锁将永远无法释放。
+ * 72、轮询锁和定时锁：lock.tryLock()
+ * 73、ReentrantLock提供了两种公平性选择：非公平的锁（默认）或公平的锁。在公平的锁上，线程将按照它们发出请求的顺序来获得锁，但在非公平的锁上，
+ * 则“允许”插队，当一个线程请求非公平的锁时，如果在发出请求的同时该锁的状态变为可用，那么这个线程将跳过队列中所有等待的线程并获得该锁。
+ * 74、ReentrantLock在加锁和内存上提供的语义和内置锁相同，此外它还提供了一些其他功能，包括定时的锁、可中断的锁等待、公平性、和实现非块结构的加锁。
+ * 然而，在未来JVM可能优化的是内置锁，而不是ReentrantLock，尽量能用内置锁就用它。
+ * 75、ReadWriteLock的加锁策略：允许多个读操作同时进行，但每次只允许一个写操作。ReentrantReadWriteLock提供了可重入的加锁语义。
+ * {@link com.general.lneartao.lib.concurrency.ohter.ReadWriteMap}
+ * 76、状态依赖性的管理
+ * {@link com.general.lneartao.lib.concurrency.test.GrumpyBoundedBuffer}
+ * {@link com.general.lneartao.lib.concurrency.test.SleepyBoundedBuffer}
+ * {@link com.general.lneartao.lib.concurrency.test.BoundedBuffer}
+ * 77、使用条件队列（最好避免，尽量基于LinkedBlockingQueue, Latch, Semaphore, FutureTask来构造程序）
+ * 条件谓语：使某个操作成为状态依赖操作的前提条件。条件等待中存在一种重要的三元关系，包括加锁、wait方法和一个条件谓语。
+ * Object可以是内置的条件队列和锁，wait()、notifyAll()
+ * 每当在等待一个条件时，一定要确保在条件谓语变为真时通过某种方式发出通知
+ * {@link com.general.lneartao.lib.concurrency.test.BoundedBuffer}
+ * 入口协议和出口协议：入口协议就是该操作的条件谓语，出口协议则包括，检查被该操作修改的所有状态变量。并确认它们是否使某个其他的条件谓词变为真，如果是，则通知相关的条件队列。
+ * 显式的Condition对象（条件队列）。需要注意的是，它继承了Object，但是和wait(), notify(), notifyAll()对应的方法是await(), signal(), signalAll()，
+ * 且提供了更丰富的功能：在每个锁上可存在多个等待、条件等待可以是中断的或不可中断的、基于时限的等待，以及公平的或非公平的队列操作
+ * {@link com.general.lneartao.lib.concurrency.test.ConditionBoundedBuffer}
+ * 78、AbstractQueuedSynchronizer是一个用于构建锁和同步器的框架，如ReentrantLock, Semaphore, CountDownLatch等等
+ * {@link com.general.lneartao.lib.concurrency.safe.OneShotLatch}
+ * 79、Java内存模型说明了某个线程的内存操作在哪些情况下对其他线程是可见的。
+ * 80、缓存一致性(Cache Coherence)
+ * 81、JMM(Java内存模型)为程序中所有的操作定义了一个偏序关系，称之为Happens-Before，它的规则包括
+ * 程序顺序规则：如果程序中操作A在操作B之前，那么在线程中A操作将在B操作之前执行；
+ * 监视器规则：在监视器锁上的解锁操作必须在同一个监视器锁上的加锁操作之前执行；
+ * volatile变量规则：对volatile变量的写入操作必须在该变量的读操作之前执行
+ * 线程启动规则：在线程上对Thread.start的调用必须在该变量的读操作之前执行
+ * 线程结束规则：线程中的任何操作都必须在其他线程检测到该线程已经结束之前执行，或者从Thread.join中成功返回，或者在调用Thread.isAlive时返回false
+ * 中断规则：当一个线程在另一个线程上调用interrupt时，必须在被中断线程检测到interrupt调用之前执行（通过抛出InterruptedException，或者调用isInterrupted和interrupted）
+ * 终接器规则：对象的构造函数必须在启动该对象的终接器之前执行完成
+ * 传递性：如果操作A在操作B之前执行，并且操作B在操作C之前执行，那么操作A必须在操作C之前执行
+ * 81、除了不可变对象外，使用被另一个线程初始化的对象通常都是不安全的，除非对象的发布操作是在使用该对象的线程开始使用之前执行。
+ * {@link com.general.lneartao.lib.concurrency.unsafe.UnsafeLazyInitialization}
+ * {@link com.general.lneartao.lib.concurrency.safe.SafeLazyInitialization}
+ * 82、初始化安全性只能保证通过final域可达的值从构造过程完成时开始的可见性。对于通过非final域可达的值，或者在构成过程完成后可能改变的值，必须采用同步来确保可见性。
  *
  * @author lneartao
  * @date 2018/4/12.
