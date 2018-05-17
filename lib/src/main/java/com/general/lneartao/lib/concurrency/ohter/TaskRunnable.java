@@ -2,8 +2,6 @@ package com.general.lneartao.lib.concurrency.ohter;
 
 import java.util.concurrent.BlockingQueue;
 
-import javafx.concurrent.Task;
-
 /**
  * Restoring the interrupted status so as not to swallow the interrupt
  *
@@ -27,5 +25,6 @@ public class TaskRunnable implements Runnable {
 
     }
 
-
+    interface Task {
+    }
 }
