@@ -5,5 +5,5 @@ package com.general.lneartao.lib.designpattern.singleton;
  */
 
 public enum EnumSingleton {
-    INSTANCE;
+    INSTANCE
 }

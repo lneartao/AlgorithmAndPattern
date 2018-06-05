@@ -36,6 +36,12 @@ public class Logger {
         System.out.println(x);
     }
 
+    public static void printl(String[] x) {
+        for (String s : x) {
+            printl(s);
+        }
+    }
+
     public static void printl(int[] x) {
         for (Integer num : x) {
             System.out.print(num);
