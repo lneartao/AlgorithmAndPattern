@@ -1,4 +1,4 @@
-package com.general.lneartao.lib.refactor.rearrange;
+package com.general.lneartao.lib.refactor.reorganize_method;
 
 /**
  * 内联函数：在函数调用点插入函数本体，然后移除该函数

@@ -1,4 +1,4 @@
-package com.general.lneartao.lib.refactor.rearrange;
+package com.general.lneartao.lib.refactor.reorganize_method;
 
 /**
  * 移除对参数的赋值：以一个临时变量取代该参数的位置

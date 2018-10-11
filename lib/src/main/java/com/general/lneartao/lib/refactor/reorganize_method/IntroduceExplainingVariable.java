@@ -1,4 +1,4 @@
-package com.general.lneartao.lib.refactor.rearrange;
+package com.general.lneartao.lib.refactor.reorganize_method;
 
 /**
  * 引入解释性变量：将该复杂表达式（或其中一部分）的结果放进一个临时变量，以此变量名称来解释表达式用途

@@ -1,4 +1,4 @@
-package com.general.lneartao.lib.refactor.rearrange;
+package com.general.lneartao.lib.refactor.reorganize_method;
 
 import com.general.lneartao.lib.Logger;
 

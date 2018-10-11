@@ -1,4 +1,4 @@
-package com.general.lneartao.lib.refactor.rearrange;
+package com.general.lneartao.lib.refactor.reorganize_method;
 
 /**
  * 分解临时变量：针对每次赋值，创造一个独立、对应的临时变量

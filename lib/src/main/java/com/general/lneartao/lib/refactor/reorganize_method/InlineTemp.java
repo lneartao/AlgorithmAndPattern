@@ -1,4 +1,4 @@
-package com.general.lneartao.lib.refactor.rearrange;
+package com.general.lneartao.lib.refactor.reorganize_method;
 
 /**
  * 内联临时变量：将所有对该变量的引用动作，替换为对它赋值的那个表达式自身
