@@ -34,7 +34,7 @@ public class MethodTroubleToo {
                     m.invoke(mtt);                  // works
                     break;
                 case 1:
-                    m.invoke(mtt, null);    // works，但是会有编译tix
+//                    m.invoke(mtt, null);    // works，但是会有编译tip
                     break;
                 case 2:
                     Object arg2 = null;             // IllegalArgumentException

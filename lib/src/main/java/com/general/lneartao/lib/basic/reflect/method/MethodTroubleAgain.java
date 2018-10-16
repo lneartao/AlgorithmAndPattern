@@ -13,7 +13,7 @@ public class MethodTroubleAgain {
         try {
             Class<?> c = ac.getClass();
             Method m = c.getDeclaredMethod("m");
-//            m.setAccessible(true);  // solution
+            m.setAccessible(true);  // solution
             Object o = m.invoke(ac);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();

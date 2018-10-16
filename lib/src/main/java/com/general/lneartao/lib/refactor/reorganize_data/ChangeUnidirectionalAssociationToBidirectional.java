@@ -1,6 +1,5 @@
 package com.general.lneartao.lib.refactor.reorganize_data;
 
-import com.sun.istack.internal.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,7 +35,7 @@ public class ChangeUnidirectionalAssociationToBidirectional {
             customers.add(customer);
         }
 
-        void removeCustomer(@NotNull Customer customer) {
+        void removeCustomer(Customer customer) {
             customer.friendOrders().remove(this);
             customers.remove(customer);
         }
