@@ -1,6 +1,8 @@
 package com.general.lneartao.lib.refactor.simplify;
 
 /**
+ * 以卫语句取代嵌套条件表达式：使用卫语句表现所有特殊情况
+ *
  * @author lneartao
  * @date 2018/10/15.
  */
@@ -9,32 +11,25 @@ public class ReplaceNestedConditionalWithGuardClauses {
     private double getPayAmount(boolean isRetired, boolean isSeparated, boolean isDead) {
         double result;
         if (isDead) {
-            result = deadAmount();
-        } else {
-            if (isSeparated) {
-                result = separatedAmount();
-            } else {
-                if (isRetired) {
-                    result = retireAmount();
-                } else {
-                    result = normalPayAmount();
-                }
-            }
+            return deadAmount();
         }
-        return result;
+        if (isSeparated) {
+            return separatedAmount();
+        }
+        if (isRetired) {
+            return retireAmount();
+        }
+        return normalPayAmount();
     }
 
     public double getAdjustedCapital(int ADJ_FACTOR,
                                      int duration,
                                      double income,
                                      int intRate, int capital) {
-        double result = 0.0;
-        if (capital > 0) {
-            if (intRate > 0 && duration > 0) {
-                result = income / duration * ADJ_FACTOR;
-            }
+        if (capital <= 0 || intRate <= 0 || duration <= 0) {
+            return 0.0;
         }
-        return result;
+        return income / duration * ADJ_FACTOR;
     }
 
     private double deadAmount() {

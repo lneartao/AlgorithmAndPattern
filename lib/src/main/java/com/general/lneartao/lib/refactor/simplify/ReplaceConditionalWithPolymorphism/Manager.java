@@ -9,4 +9,9 @@ public class Manager extends EmployeeType {
     int getTypeCode() {
         return EmployeeType.MANAGER;
     }
+
+    @Override
+    public int payAmount() {
+        return 2;
+    }
 }

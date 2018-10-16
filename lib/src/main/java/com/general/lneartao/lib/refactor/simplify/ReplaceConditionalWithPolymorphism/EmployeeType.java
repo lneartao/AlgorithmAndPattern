@@ -11,4 +11,6 @@ public abstract class EmployeeType {
     static final int MANAGER = 2;
 
     abstract int getTypeCode();
+
+    abstract int payAmount();
 }

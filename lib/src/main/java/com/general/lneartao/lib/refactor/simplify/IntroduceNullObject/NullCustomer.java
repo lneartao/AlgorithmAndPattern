@@ -2,28 +2,27 @@ package com.general.lneartao.lib.refactor.simplify.IntroduceNullObject;
 
 /**
  * @author lneartao
- * @date 2018/10/15.
+ * @date 2018/10/16.
  */
-public class Customer implements Nullable {
+public class NullCustomer extends Customer {
 
+    @Override
     public String getName() {
-        return "";
+        return "occupant";
     }
 
+    @Override
     public BillingPlan getPlan() {
-        return new BillingPlan();
+        return BillingPlan.basic();
     }
 
+    @Override
     public PaymentHistory getHistory() {
-        return new PaymentHistory();
+        return PaymentHistory.newNull();
     }
 
     @Override
     public boolean isNull() {
-        return false;
-    }
-
-    public static Customer newNull() {
-        return new NullCustomer();
+        return true;
     }
 }

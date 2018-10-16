@@ -1,6 +1,8 @@
 package com.general.lneartao.lib.refactor.simplify.IntroduceNullObject;
 
 /**
+ * 引入Null对象：将null值替换为null对象
+ *
  * @author lneartao
  * @date 2018/10/15.
  */
@@ -8,30 +10,15 @@ public class Site {
     private Customer customer;
 
     public Customer getCustomer() {
-        return customer;
+        return (customer == null) ? Customer.newNull() : customer;
     }
 
     private static void doSomething(Site site) {
         Customer customer = site.getCustomer();
-        BillingPlan plan;
-        if (customer == null) {
-            plan = BillingPlan.basic();
-        } else {
-            plan = customer.getPlan();
-        }
+        BillingPlan plan = customer.getPlan();
 
-        String customerName;
-        if (customer == null) {
-            customerName = "occupant";
-        } else {
-            customerName = customer.getName();
-        }
+        String customerName = customer.getName();
 
-        int weeksDelingquent;
-        if (customer == null) {
-            weeksDelingquent = 0;
-        } else {
-            weeksDelingquent = customer.getHistory().getWeeksDelingquentInLastYear();
-        }
+        int weeksDelingquent = customer.getHistory().getWeeksDelinquentInLastYear();
     }
 }
