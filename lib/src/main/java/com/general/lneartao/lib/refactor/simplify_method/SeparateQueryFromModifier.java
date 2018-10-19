@@ -1,19 +1,38 @@
 package com.general.lneartao.lib.refactor.simplify_method;
 
 /**
+ * 将查询函数和修改函数分离：建立两个不同的函数，其中一个负责查询，另一个负责修改
+ * 任何有返回值的函数，都不应该有看得到的副作用
+ *
  * @author lneartao
  * @date 2018/10/17.
  */
 public class SeparateQueryFromModifier {
 
-    private String foundMiscreant(String[] people) {
-        for (int i = 0; i < people.length; i++) {
-            if (people[i].equals("Don")) {
-                sendAlert();
+    /**
+     * 修改函数
+     *
+     * @param people
+     */
+    private void sendAlert(String[] people) {
+        if (!foundPerson(people).equals("")) {
+            sendAlert();
+        }
+    }
+
+    /**
+     * 查询函数
+     *
+     * @param people
+     *
+     * @return
+     */
+    private String foundPerson(String[] people) {
+        for (String aPeople : people) {
+            if (aPeople.equals("Don")) {
                 return "Don";
             }
-            if (people[i].equals("John")) {
-                sendAlert();
+            if (aPeople.equals("John")) {
                 return "John";
             }
         }
@@ -25,11 +44,13 @@ public class SeparateQueryFromModifier {
     }
 
     private void checkSecurity(String[] people) {
-        String found = foundMiscreant(people);
+        sendAlert(people);
+        String found = foundPerson(people);
         someLaterCode(found);
     }
 
     private void someLaterCode(String found) {
 
     }
+
 }

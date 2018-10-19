@@ -1,24 +1,22 @@
 package com.general.lneartao.lib.refactor.simplify_method.ReplaceParameterWithExplicitMethods;
 
 /**
+ * 以明确函数取代参数：针对该参数的每一个可能值，建立一个独立函数
  * @author lneartao
  * @date 2018/10/17.
  */
 public class Employee {
-    static final int ENGINEER = 0;
-    static final int SALESMAN = 1;
-    static final int MANAGER = 2;
 
-    static Employee create(int type) {
-        switch (type) {
-            case ENGINEER:
-                return new Engineer();
-            case SALESMAN:
-                return new Salesman();
-            case MANAGER:
-                return new Manager();
-            default:
-                throw new IllegalArgumentException("Incorrect type code value");
-        }
+    public static Manager createManager() {
+        return new Manager();
     }
+
+    public static Salesman createSalesman() {
+        return new Salesman();
+    }
+
+    public static Engineer createEngineer() {
+        return new Engineer();
+    }
+
 }
