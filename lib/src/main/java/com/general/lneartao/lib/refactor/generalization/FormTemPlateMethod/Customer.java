@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * 塑造模版函数：将这些操作分别放进独立函数中，并保持它们都有相同的签名，于是原函数也就变得相同了。然后将原函数上移至超类
+ *
  * @author lneartao
  * @date 2018/10/22.
  */
@@ -28,33 +30,14 @@ public class Customer {
     }
 
     public String statement() {
-        Iterator<Rental> iterator = rentals.iterator();
-        StringBuilder result = new StringBuilder("Rental Record for " + getName() + "\n");
-        while (iterator.hasNext()) {
-            Rental each = iterator.next();
-            result.append("\t" + each.getMovie()
-                                     .getTitle() + "\t" + String.valueOf(each.getCharge()) + "\n");
-        }
-        result.append("Amount owed is " + String.valueOf(getTotalCharge()) + "\n");
-        result.append("You earned " + String.valueOf(getTotalFrequentRenterPoints()) + " frequent renter points");
-        return result.toString();
+        return new TextStatement().value(this);
     }
 
     public String htmlStatement() {
-        Iterator<Rental> iterator = rentals.iterator();
-        StringBuilder result =
-                new StringBuilder("<H1>Rental Record for <EM>" + getName() + "</EM></H1><P>\n");
-        while (iterator.hasNext()) {
-            Rental each = iterator.next();
-            result.append("\t" + each.getMovie()
-                                     .getTitle() + "\t" + String.valueOf(each.getCharge()) + "<BR>\n");
-        }
-        result.append("<P>You owe <EM>" + String.valueOf(getTotalCharge()) + "</EM><P>\n");
-        result.append("On this rental you earned <EM>" + String.valueOf(getTotalFrequentRenterPoints()) + "</EM> frequent renter points<P>");
-        return result.toString();
+        return new HtmlStatement().value(this);
     }
 
-    private double getTotalCharge() {
+    public double getTotalCharge() {
         double result = 0;
         Iterator<Rental> iterator = rentals.iterator();
         while (iterator.hasNext()) {
@@ -64,7 +47,7 @@ public class Customer {
         return result;
     }
 
-    private int getTotalFrequentRenterPoints() {
+    public int getTotalFrequentRenterPoints() {
         int result = 0;
         Iterator<Rental> iterator = rentals.iterator();
         while (iterator.hasNext()) {
@@ -72,5 +55,9 @@ public class Customer {
             result += rental.getFrequentRenterPoints();
         }
         return result;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
     }
 }

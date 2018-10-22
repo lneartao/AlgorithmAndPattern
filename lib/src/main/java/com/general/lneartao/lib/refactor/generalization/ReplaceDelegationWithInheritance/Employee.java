@@ -1,23 +1,15 @@
 package com.general.lneartao.lib.refactor.generalization.ReplaceDelegationWithInheritance;
 
 /**
+ * 以继承取代委托：让委托类继承受托类
+ *
  * @author lneartao
  * @date 2018/10/22.
  */
-public class Employee {
-
-    Person person = new Person();
-
-    public String getName() {
-        return person.getName();
-    }
-
-    public void setName(String name) {
-        person.setName(name);
-    }
+public class Employee extends Person {
 
     @Override
     public String toString() {
-        return "Emp: " + person.getLastName();
+        return "Emp: " + getLastName();
     }
 }

@@ -8,12 +8,8 @@ import java.util.Date;
  */
 public class RegularCustomer extends Customer {
 
-    void createBill(Date date) {
-        double chargeAmount = chargeFor(lastBillDate, date);
-        addBill(date, chargeAmount);
-    }
-
-    private double chargeFor(Date lastBillDate, Date date) {
+    @Override
+    public double chargeFor(Date lastBillDate, Date date) {
         return 0;
     }
 }

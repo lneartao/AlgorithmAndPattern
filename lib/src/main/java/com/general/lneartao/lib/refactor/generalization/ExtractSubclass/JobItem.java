@@ -8,17 +8,11 @@ public class JobItem {
 
     private int unitPrice;
     private int quantity;
-    private boolean isLabor;
-    private Employee employee;
 
-    public JobItem(int unitPrice,
-                   int quantity,
-                   boolean isLabor,
-                   Employee employee) {
+    JobItem(int unitPrice,
+            int quantity) {
         this.unitPrice = unitPrice;
         this.quantity = quantity;
-        this.isLabor = isLabor;
-        this.employee = employee;
     }
 
     public int getTotalPrice() {
@@ -26,7 +20,7 @@ public class JobItem {
     }
 
     public int getUnitPrice() {
-        return isLabor ? employee.getRate() : unitPrice;
+        return unitPrice;
     }
 
     public int getQuantity() {
@@ -34,10 +28,7 @@ public class JobItem {
     }
 
     public boolean isLabor() {
-        return isLabor;
+        return false;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
 }

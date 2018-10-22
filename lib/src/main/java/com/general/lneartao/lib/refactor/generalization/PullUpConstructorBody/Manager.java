@@ -9,8 +9,13 @@ public class Manager extends Employee {
     private int grade;
 
     public Manager(String name, String id, int grade) {
-        super.name = name;
-        super.id = id;
+        super(name, id);
         this.grade = grade;
+        initialize();
+    }
+
+    @Override
+    boolean isPriviliged() {
+        return grade > 4;
     }
 }

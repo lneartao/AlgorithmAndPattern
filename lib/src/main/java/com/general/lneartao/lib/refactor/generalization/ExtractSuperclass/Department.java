@@ -4,18 +4,20 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * 提炼超类：为这两个雷建立一个超类，将相同特性移至超类
+ *
  * @author lneartao
  * @date 2018/10/22.
  */
-public class Department {
-    private String name;
+public class Department extends Party {
     private List<Employee> staff;
 
     public Department(String name) {
-        this.name = name;
+        super(name);
     }
 
-    public int getTotalAnnualCost() {
+    @Override
+    public int getAnnualCost() {
         Iterator<Employee> iterator = getStaff();
         int result = 0;
         while (iterator.hasNext()) {
@@ -37,7 +39,4 @@ public class Department {
         staff.add(employee);
     }
 
-    public String getName() {
-        return name;
-    }
 }

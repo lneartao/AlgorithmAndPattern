@@ -7,7 +7,7 @@ package com.general.lneartao.lib.refactor.generalization.ExtractInterface;
  */
 public class TimeSheet {
 
-    private double charge(Employee employee, int days) {
+    private double charge(Billable employee, int days) {
         int base = employee.getRate() + days;
         if (employee.hasSpecialSkill()) {
             return base * 1.05;
