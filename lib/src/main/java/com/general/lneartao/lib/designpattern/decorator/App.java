@@ -3,7 +3,7 @@ package com.general.lneartao.lib.designpattern.decorator;
 import com.general.lneartao.lib.Logger;
 
 /**
- * 装饰模式
+ * 装饰模式：动态地将责任附加到对象上，若要扩展功能，装饰者提供了比继承更有弹性的替代方案
  * Created by lneartao on 2017/11/15.
  */
 
