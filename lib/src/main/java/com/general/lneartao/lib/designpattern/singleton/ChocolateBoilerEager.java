@@ -6,7 +6,7 @@ package com.general.lneartao.lib.designpattern.singleton;
  */
 public class ChocolateBoilerEager {
 
-    private static ChocolateBoilerEager INSTANCE = new ChocolateBoilerEager();
+    private static final ChocolateBoilerEager INSTANCE = new ChocolateBoilerEager();
     private boolean empty;
     private boolean boiled;
 

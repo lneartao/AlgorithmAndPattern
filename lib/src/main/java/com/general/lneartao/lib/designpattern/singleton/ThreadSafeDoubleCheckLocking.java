@@ -6,11 +6,14 @@ package com.general.lneartao.lib.designpattern.singleton;
 
 public class ThreadSafeDoubleCheckLocking {
     private static volatile ThreadSafeDoubleCheckLocking INSTANCE;
+    private static boolean flag = true;
 
     // 防止反射
     private ThreadSafeDoubleCheckLocking() {
-        if (INSTANCE != null) {
-            throw new IllegalStateException("Already initialized");
+        if (flag) {
+            flag = false;
+        } else {
+            throw new AssertionError("Already initialized");
         }
     }
 
