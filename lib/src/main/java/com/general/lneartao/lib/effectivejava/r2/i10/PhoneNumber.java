@@ -39,7 +39,7 @@ package com.general.lneartao.lib.effectivejava.r2.i10;
  * 2. 不要企图让equals方法过于智能
  * 3. 不要将equals声明中的Object对象替换为其他的类型
  * <p>
- * 推荐使用Goggle开源的AutoValue
+ * 推荐使用Google开源的AutoValue
  */
 public class PhoneNumber {
     private final short areaCode, prefix, lineNum;
