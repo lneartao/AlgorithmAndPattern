@@ -9,7 +9,9 @@ import java.util.Objects;
  * 1. 必须确保所有的x和y都满足 x.compareTo(y) = - y.compareTo(x)
  * 2. 必须确保这个关系是可传递的 x.compareTo(y) > 0 && y.compareTo(z) > 0, so x.compareTo(z) > 0
  * 3. 必须确保 x.compareTo(y) = 0
- * 4. 强烈建议 (x.compareTo(y) == 0) == (x.equals(y))
+ * 4. 强烈建议 (x.compareTo(y) == 0) == (x.equals(y))，如果违反了，那么有序集合可能无法遵守相应集合接口的通用约定
+ * 比如BigDecimal，如果创建一个空的HashSet，添加 new BigDecimal("1.0")和 new BigDecimal("1.00")，这个集合就包含两个元素，因为HashSet是通过equals()方法来比较的，而结果不相等。
+ * 而如果创建一个TreeSet，并添加上面的两个对象，你会发现这个集合只包含一个元素，因为TreeSet是通过compareTo()方法来比较的，而结果是相等。
  * <p>
  * 在比较中使用类提供的compareTo方法，不要使用 > 或 <
  *

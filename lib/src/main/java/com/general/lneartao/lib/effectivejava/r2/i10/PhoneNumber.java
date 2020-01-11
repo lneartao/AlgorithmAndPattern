@@ -32,7 +32,7 @@ import java.util.Objects;
  * 2。使用instanceof操作符检查“参数是否为正确的参数”
  * 3. 把参数转换成正确的类型
  * 4. 对于该类中的每个关键域，检查参数中的域是否与该对象中对应域相匹配
- * 对于float，使用Float.compare(float, float)检查是否相等，因为存在着-0.0f等常量，以及飘出了自动装箱
+ * 对于float，使用Float.compare(float, float)检查是否相等，因为存在着-0.0f等常量，以及排出了自动装箱
  * 对于double，使用Double.compare(double, double)检查是否相等
  * 如果有些域包含null可能是合法的，那么避免导致空指针异常，可以使用Objects.equals(Object, Object)
  * <p>

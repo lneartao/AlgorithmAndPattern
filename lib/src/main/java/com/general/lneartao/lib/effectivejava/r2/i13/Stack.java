@@ -18,7 +18,7 @@ import java.util.EmptyStackException;
  * 1. 不可变类永远都不应该提供clone方法，因为它只会激发不必要的clone
  * 2. 对super.clone方法的调用应当包含在一个try-catch块中
  * 3. 像构造器一样，clone方法也不应该在构造的过程中，调用可以覆盖的方法
- * 4. 公有的clone方法应该省略throes声明，这样使用起来更加轻松
+ * 4. 公有的clone方法应该省略throws声明，这样使用起来更加轻松
  * 5. 如果要编写线程安全的clone方法，那么它的clone方法必须得到严格的同步，比如synchronized
  * <p>
  * clone方法就是另一个构造器，必须确保它不会伤害到原始的对象，并确保正确地创建被克隆对象中的约束条件
