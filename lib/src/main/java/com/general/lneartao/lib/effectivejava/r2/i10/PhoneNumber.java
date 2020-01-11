@@ -1,5 +1,7 @@
 package com.general.lneartao.lib.effectivejava.r2.i10;
 
+import java.util.Objects;
+
 /**
  * @author lneartao
  * @date 2020/1/9.
@@ -73,7 +75,6 @@ public class PhoneNumber {
 
     @Override
     public int hashCode() {
-        return 1;
-//        return com.google.common.base.Objects.hashCode(areaCode, prefix, lineNum);
+        return Objects.hash(areaCode, prefix, lineNum);
     }
 }
