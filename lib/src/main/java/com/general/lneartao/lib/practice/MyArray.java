@@ -41,7 +41,7 @@ public class MyArray {
 
     private void ensureCapacity() {
         if (count >= len) {
-            len = len * 2;
+            len = len * 2 + 1;
             data = Arrays.copyOf(data, len);
         }
     }
