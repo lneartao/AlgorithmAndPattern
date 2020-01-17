@@ -1,4 +1,4 @@
-package com.general.lneartao.lib.practice;
+package com.general.lneartao.lib.practice.array;
 
 import java.util.Arrays;
 

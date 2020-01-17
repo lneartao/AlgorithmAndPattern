@@ -1,4 +1,4 @@
-package com.general.lneartao.lib.practice;
+package com.general.lneartao.lib.practice.linkedlist;
 
 /**
  * 1) 单链表反转
@@ -51,12 +51,41 @@ public class LinkedListAlgo {
 
     /**
      * 链表中环的检测
+     * 方法一：利用了HashMap存储的对象唯一性（不重写对象的equals和hashCode方法），保存当前节点的前驱，然后查询是否已插入HashMap可得结果
+     * 方法二：有点像在操场跑步，如果一个人比另一个人快一倍，那么如果有环，那么他们总会相遇
      *
      * @param head
      *
      * @return
      */
     public static boolean checkCircle(ListNode head) {
+        // 方法一
+//        ListNode sentinel = new ListNode(-1);
+//        sentinel.next = head;
+//        HashMap<ListNode, ListNode> cache = new HashMap<>();
+//        while (sentinel.next != null) {
+//            if (cache.get(sentinel.next) == null) {
+//                cache.put(sentinel.next, sentinel);
+//            } else {
+//                return true;
+//            }
+//            sentinel = sentinel.next;
+//        }
+//        return false;
+
+        // 方法二
+        if (head == null) {
+            return false;
+        }
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -147,6 +176,41 @@ public class LinkedListAlgo {
         return head;
     }
 
+    /**
+     * 求链表的中间结点
+     *
+     * @param head
+     *
+     * @return
+     */
+    public static ListNode findMiddleNode(ListNode head) {
+//        if (head == null) {
+//            return null;
+//        }
+//        ListNode slow = head;
+//        ListNode fast = head;
+//        while (fast.next != null && fast.next.next != null) {
+//            slow = slow.next;
+//            fast = fast.next.next;
+//        }
+//        if (fast.next == null) {
+//            return slow;
+//        } else {
+//            return slow.next;
+//        }
+
+        if (head == null) {
+            return null;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
     public static void printAll(ListNode list) {
         ListNode p = list;
         while (p != null) {
@@ -172,7 +236,22 @@ public class LinkedListAlgo {
     public static void main(String[] args) {
 //        testReverse();
 //        testMerge();
-        testDeleteK();
+//        testDeleteK();
+//        testMiddleK();
+        testCycle();
+    }
+
+    private static void testCycle() {
+        System.out.println(checkCircle(createCycleNode(0, 1, 2)));
+        System.out.println(checkCircle(createCycleNode(1, 3, 2, 0, -4)));
+        System.out.println(checkCircle(createCycleNode(-1, 1)));
+    }
+
+    private static void testMiddleK() {
+        printAll(findMiddleNode(createNode(1)));
+        printAll(findMiddleNode(createNode(1, 2)));
+        printAll(findMiddleNode(createNode(1, 2, 3, 4, 5)));
+        printAll(findMiddleNode(createNode(1, 2, 3, 4, 5, 6)));
     }
 
     private static void testDeleteK() {
@@ -212,6 +291,13 @@ public class LinkedListAlgo {
         printAll(reverse(createNode(1, 2, 3, 4, 5)));
     }
 
+    /**
+     * 创建无环单链表
+     *
+     * @param vales
+     *
+     * @return
+     */
     private static ListNode createNode(int... vales) {
         ListNode node = new ListNode(-1);
         ListNode head = node;
@@ -219,6 +305,29 @@ public class LinkedListAlgo {
             node.next = new ListNode(vale);
             node = node.next;
         }
+        return head.next;
+    }
+
+    /**
+     * 创建有环单链表
+     *
+     * @param pos 第几个位置成环
+     * @param vales
+     *
+     * @return
+     */
+    private static ListNode createCycleNode(int pos, int... vales) {
+        ListNode node = new ListNode(-1);
+        ListNode head = node;
+        ListNode loopNode = null;
+        for (int i = 0; i < vales.length; i++) {
+            node.next = new ListNode(vales[i]);
+            node = node.next;
+            if (i == pos) {
+                loopNode = node;
+            }
+        }
+        node.next = loopNode;
         return head.next;
     }
 }

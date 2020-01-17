@@ -1,4 +1,4 @@
-package com.general.lneartao.lib.practice;
+package com.general.lneartao.lib.practice.linkedlist;
 
 /**
  * 这种写法是默认有一个头结点

@@ -1,4 +1,4 @@
-package com.general.lneartao.lib.practice;
+package com.general.lneartao.lib.practice.linkedlist;
 
 /**
  * 单链表的插入、删除、查找操作；

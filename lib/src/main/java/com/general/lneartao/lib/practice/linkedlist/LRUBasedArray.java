@@ -1,4 +1,4 @@
-package com.general.lneartao.lib.practice;
+package com.general.lneartao.lib.practice.linkedlist;
 
 import java.util.HashMap;
 import java.util.Map;
