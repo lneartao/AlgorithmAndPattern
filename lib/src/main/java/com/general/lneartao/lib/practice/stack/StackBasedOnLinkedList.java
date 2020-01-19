@@ -6,25 +6,44 @@ package com.general.lneartao.lib.practice.stack;
  * @author lneartao
  * @date 2020/1/17.
  */
-public class StackBasedOnLinkedList {
+public class StackBasedOnLinkedList<T> {
 
-    private Node top = null;
+    private Node<T> top = null;
+    private int size;
 
-    public void push(int value) {
-        top = new Node(value, top);
+    public void push(T value) {
+        top = new Node<>(value, top);
+        size++;
     }
 
-    public int pop() {
-        int result = Integer.MIN_VALUE;
+    public T pop() {
+        T result = null;
         if (top != null) {
             result = top.data;
             top = top.next;
+            size--;
         }
         return result;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public T getTopData() {
+        if (top != null) {
+            return top.data;
+        }
+        return null;
+    }
+
+    public void clear() {
+        top = null;
+        size = 0;
+    }
+
     public void printAll() {
-        Node p = top;
+        Node<T> p = top;
         while (p != null) {
             System.out.print(p.data + " ");
             p = p.next;
@@ -32,16 +51,16 @@ public class StackBasedOnLinkedList {
         System.out.println();
     }
 
-    private static class Node {
-        private int data;
-        private Node next;
+    private static class Node<T> {
+        private T data;
+        private Node<T> next;
 
-        public Node(int data, Node next) {
+        public Node(T data, Node<T> next) {
             this.data = data;
             this.next = next;
         }
 
-        public int getData() {
+        public T getData() {
             return data;
         }
     }
