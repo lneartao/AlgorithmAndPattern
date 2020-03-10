@@ -1,7 +1,5 @@
 package com.general.lneartao.lib.practice.sorts;
 
-import java.util.Arrays;
-
 /**
  * 冒泡排序、插入排序、选择排序
  *
@@ -134,10 +132,106 @@ public class Sorts {
         }
     }
 
+    /**
+     * 归并排序
+     *
+     * @param arr 数组
+     */
+    public static void mergeSort(int[] arr) {
+        int[] tempArr = new int[arr.length];
+        mergeSort(arr, tempArr, 0, arr.length - 1);
+    }
+
+    private static void mergeSort(int[] arr, int[] tempArr, int left, int right) {
+        if (left < right) {
+            int center = (left + right) / 2;
+            mergeSort(arr, tempArr, left, center);
+            mergeSort(arr, tempArr, center + 1, right);
+            merge(arr, tempArr, left, center + 1, right);
+        }
+    }
+
+    private static void merge(int[] arr, int[] tempArr, int leftPos, int rightPos, int rightEnd) {
+        int leftEnd = rightPos - 1;
+        int tmpPos = leftPos;
+        int numElements = rightEnd - leftPos + 1;
+
+        while (leftPos <= leftEnd && rightPos <= rightEnd) {
+            if (arr[leftPos] <= arr[rightPos]) {
+                tempArr[tmpPos++] = arr[leftPos++];
+            } else {
+                tempArr[tmpPos++] = arr[rightPos++];
+            }
+        }
+
+        while (leftPos <= leftEnd) {
+            tempArr[tmpPos++] = arr[leftPos++];
+        }
+
+        while ((rightPos <= rightEnd)) {
+            tempArr[tmpPos++] = arr[rightPos++];
+        }
+
+        for (int i = 0; i < numElements; i++, rightEnd--) {
+            arr[rightEnd] = tempArr[rightEnd];
+        }
+    }
+
+    private static void quickSort(int[] a) {
+        quickSort(a, 0, a.length - 1);
+    }
+
+    private static void quickSort(int[] a, int left, int right) {
+        if (left < right) {
+            int p = partition(a, left, right);
+            quickSort(a, left, p - 1);
+            quickSort(a, p + 1, right);
+        }
+    }
+
+    private static int partition(int[] a, int left, int right) {
+        int i = left;
+        for (int j = left; j < right; j++) {
+            if (a[j] < a[right]) {
+                swap(a, i, j);
+                i++;
+            }
+        }
+        swap(a, right, i);
+        return i;
+    }
+
+    private static void swap(int[] a, int i, int j) {
+        int temp;
+        temp = a[j];
+        a[j] = a[i];
+        a[i] = temp;
+    }
+
+    private static int findK(int a[], int k) {
+        return findK(a, k, 0, a.length - 1);
+    }
+
+    private static int findK(int[] a, int k, int left, int right) {
+        if (left < right) {
+            int p = partition(a, left, right);
+            if (p + 1 == k) {
+                return a[p];
+            } else if (k > p + 1) {
+                return findK(a, k, p + 1, right);
+            } else {
+                return findK(a, k, left, p - 1);
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
-        int[] array = new int[]{3, 4, 2, 1, 5, 6, 7, 8};
-        selectionSort(array, array.length);
-        System.out.println(Arrays.toString(array));
+//        int[] array = new int[]{3, 4, 2, 1, 5, 6, 7, 8};
+//        quickSort(array);
+        int[] array = new int[]{4, 2, 5, 12, 3};
+        System.out.println(findK(array, 3));
+//        System.out.println(Arrays.toString(array));
     }
 
 }
