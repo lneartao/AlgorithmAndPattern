@@ -16,7 +16,8 @@ public class Search {
 //        checkArray();
         int low = 0, high = sortedArray.length - 1, mid, midVal;
         while (low <= high) {
-            mid = (low + high) >>> 1;
+            // 防止溢出
+            mid = low + ((high - low) >> 1);
             midVal = sortedArray[mid];
             if (midVal == target) {
                 return mid;
