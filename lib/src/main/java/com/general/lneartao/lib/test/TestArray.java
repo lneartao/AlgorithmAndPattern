@@ -6,7 +6,9 @@ import java.util.List;
 
 import static com.general.lneartao.lib.algorithm.Array.fib3;
 import static com.general.lneartao.lib.algorithm.Array.findOneNumber;
+import static com.general.lneartao.lib.algorithm.Array.firstMissingPositive;
 import static com.general.lneartao.lib.algorithm.Array.intersection;
+import static com.general.lneartao.lib.algorithm.Array.majorityElement;
 import static com.general.lneartao.lib.algorithm.Array.maxProduct;
 import static com.general.lneartao.lib.algorithm.Array.maxSubArray;
 import static com.general.lneartao.lib.algorithm.Array.nSum;
@@ -31,6 +33,8 @@ public class TestArray {
 //        testOddEvenSort();
 //        testFindOneNumber();
 //        testMaxProduct();
+//        testmajorityElement();
+        testFirstMissingPositive();
     }
 
     public static void testSingleNumber() {
@@ -96,6 +100,19 @@ public class TestArray {
 
     private static void testMaxProduct() {
         Logger.printl(maxProduct(new double[]{-2, 3, -4}));
+    }
+
+    private static void testMajorityElement() {
+        Logger.printl(majorityElement(new int[]{0, 1, 2, 1, 1,}));
+        Logger.printl(majorityElement(new int[]{3, 2, 3}));
+        Logger.printl(majorityElement(new int[]{2, 2, 1, 1, 1, 2, 2}));
+    }
+
+    private static void testFirstMissingPositive() {
+//        Logger.printl(firstMissingPositive(new int[]{1, 2, 0}));
+//        Logger.printl(firstMissingPositive(new int[]{3, 4, -1, 1}));
+//        Logger.printl(firstMissingPositive(new int[]{7, 8, 9, 10, 11}));
+        Logger.printl(firstMissingPositive(new int[]{100000, 1000002, -1, 1}));
     }
 
 }

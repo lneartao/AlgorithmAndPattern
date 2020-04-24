@@ -15,6 +15,7 @@ public class Array {
      * 返回数组中唯一的数字
      *
      * @param nums 数组
+     *
      * @return 唯一的数字
      */
     public static int singleNumber(int[] nums) {
@@ -49,6 +50,7 @@ public class Array {
      *
      * @param nums1 数组1
      * @param nums2 数组2
+     *
      * @return 并集数组
      */
     public static int[] intersection(int[] nums1, int[] nums2) {
@@ -102,23 +104,26 @@ public class Array {
      * https://leetcode.com/problems/3sum/description/
      *
      * @param nums 数组
+     *
      * @return 所有合理序列
      */
     public static List<List<Integer>> threeSum(int[] nums) {
         if (nums == null || nums.length < 3) {
             return new ArrayList<>();
         }
+        // 先排序
         Arrays.sort(nums);
         int len = nums.length;
         List<Integer> item;
         List<List<Integer>> result = new ArrayList<>();
         for (int i = 0; i < len - 2; i++) {
+            // 当前值跟前一个值相等，跳过
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
             int left = i + 1, right = nums.length - 1;
+            // l + r = -t
             int target = -nums[i];
-            // 下面这部分是2sum的大概解法
             while (left < right) {
                 if (nums[left] + nums[right] == target) {
                     item = new ArrayList<>(3);
@@ -126,9 +131,11 @@ public class Array {
                     item.add(nums[left++]);
                     item.add(nums[right--]);
                     result.add(item);
+                    // 当前值跟前一个值相等，跳过
                     while (left < right && nums[left] == nums[left - 1]) {
                         left++;
                     }
+                    // 当前值跟前一个值相等，跳过
                     while (left < right && nums[right] == nums[right + 1]) {
                         right--;
                     }
@@ -175,6 +182,7 @@ public class Array {
      * https://leetcode.com/problems/maximum-subarray/description/
      *
      * @param arr
+     *
      * @return
      */
     public static int maxSubArray(int[] arr) {
@@ -194,6 +202,7 @@ public class Array {
      * 斐波那契数列问题
      *
      * @param n
+     *
      * @return
      */
     public static int fib(int n) {
@@ -208,6 +217,7 @@ public class Array {
      * 一个台阶总共有n 级，如果一次可以跳1、2、3级，求总共有多少总跳法
      *
      * @param n 台阶
+     *
      * @return 跳法
      */
     public static int fib3(int n) {
@@ -223,6 +233,7 @@ public class Array {
      * 一个台阶总共有n 级，如果一次可以跳1级，也可以跳2级，求总共有多少总跳法，并分析算法的时间复杂度。
      *
      * @param n 台阶
+     *
      * @return 跳法
      */
     public static int climbStairs(int n) {
@@ -305,7 +316,7 @@ public class Array {
      * 设定数组的下标从1开始，下标范围是[1..2n]，所以数组是这样的{0,a1,a2,...,an,b1,b2,...,bn}，arr的长度是n+1，真实长度是n
      *
      * @param arr 数组
-     * @param n   数组的真实长度
+     * @param n 数组的真实长度
      */
     public static void perfectShuffle1(int[] arr, int n) {
         int i;
@@ -322,8 +333,9 @@ public class Array {
      * 在杨氏矩阵中查找某个数是否存在
      * 这里使用Step-wise线性搜索算法，比较容易理解，时间复杂度是O(row+col)
      *
-     * @param arr       非空二维杨氏矩阵
+     * @param arr 非空二维杨氏矩阵
      * @param searchVal 要查找的值
+     *
      * @return 是否存在
      */
     public static boolean youngMatrix(int[][] arr, int searchVal) {
@@ -354,6 +366,7 @@ public class Array {
      * 下面是解法三
      *
      * @param arr
+     *
      * @return
      */
     public static int findOneNumber(int[] arr) {
@@ -383,6 +396,7 @@ public class Array {
      * https://leetcode.com/problems/maximum-product-subarray/description/
      *
      * @param arr
+     *
      * @return
      */
     public static double maxProduct(double[] arr) {
@@ -409,6 +423,7 @@ public class Array {
      * https://leetcode.com/problems/increasing-triplet-subsequence/description/
      *
      * @param nums
+     *
      * @return
      */
     public static boolean increasingTriplet(int[] nums) {
@@ -424,6 +439,123 @@ public class Array {
             }
         }
         return false;
+    }
+
+    /**
+     * 求众数
+     * https://leetcode-cn.com/problems/majority-element/
+     * https://leetcode-cn.com/problems/majority-element/solution/duo-shu-yuan-su-by-leetcode-solution/
+     *
+     * @param nums
+     *
+     * @return
+     */
+    public static int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+//        Arrays.sort(nums);
+//        int count = 1;
+//        int result = nums[0];
+//        int lastNum = result;
+//        int lastCount = count;
+//        for (int i = 1; i < nums.length; i++) {
+//            if (lastNum == nums[i]) {
+//                lastCount++;
+//            } else {
+//                if (lastCount > count) {
+//                    count = lastCount;
+//                    result = lastNum;
+//                }
+//                lastNum = nums[i];
+//                lastCount = 1;
+//            }
+//        }
+//        if (lastCount > count) {
+//            result = lastNum;
+//        }
+//        return result;
+    }
+
+    /**
+     * 问题：求缺失的第一个整数
+     * 链接：https://leetcode-cn.com/problems/first-missing-positive/solution/que-shi-de-di-yi-ge-zheng-shu-by-leetcode/
+     * 算法思路：使用索引作为哈希键 以及 元素的符号作为哈希值 来实现是否存在的检测。
+     * <p>
+     * 具体步骤：
+     * 检查 1 是否存在于数组中。如果没有，则已经完成，1 即为答案。
+     * 如果 nums = [1]，答案即为 2 。
+     * 将负数，零，和大于 n 的数替换为 1 。
+     * 遍历数组。当读到数字 a 时，替换第 a 个元素的符号。
+     * 注意重复元素：只能改变一次符号。由于没有下标 n ，使用下标 0 的元素保存是否存在数字 n。
+     * 再次遍历数组。返回第一个正数元素的下标。
+     * 如果 nums[0] > 0，则返回 n 。
+     * 如果之前的步骤中没有发现 nums 中有正数元素，则返回n + 1。
+     *
+     * @param nums
+     *
+     * @return
+     */
+    public static int firstMissingPositive(int[] nums) {
+//        return firstMissingPositive32(nums);
+        int n = nums.length;
+        int contains = 0;
+        for (int num : nums) {
+            if (num == 1) {
+                contains++;
+                break;
+            }
+        }
+        if (contains == 0) {
+            return 1;
+        }
+        if (n == 1) {
+            return 2;
+        }
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= 0 || nums[i] > n) {
+                nums[i] = 1;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            int a = Math.abs(nums[i]);
+            if (a == n) {
+                nums[0] = -Math.abs(nums[0]);
+            } else {
+                nums[a] = -Math.abs(nums[a]);
+            }
+        }
+        for (int i = 1; i < n; i++) {
+            if (nums[i] > 0) {
+                return i;
+            }
+        }
+        if (nums[0] > 0) {
+            return n;
+        }
+        return n + 1;
+    }
+
+    /**
+     * 数组长度小于32位可以用位图解决
+     *
+     * @param nums
+     *
+     * @return
+     */
+    private static int firstMissingPositive32(int[] nums) {
+        int bitMap = 0;
+        for (int num : nums) {
+            if (num > 0 && num <= nums.length) {
+                int s = 1 << (num - 1);
+                bitMap |= s;
+            }
+        }
+        int result = 1;
+        while ((bitMap & 1) != 0) {
+            result++;
+            bitMap = bitMap >> 1;
+        }
+        return result;
     }
 
 }
