@@ -1,6 +1,8 @@
 package com.general.lneartao.lib.practice.queue;
 
 /**
+ * 循环单端队列
+ *
  * @author lneartao
  * @date 2020/1/20.
  */
@@ -37,6 +39,14 @@ public class CircularQueue {
             head = (head + 1) % n;
             return result;
         }
+    }
+
+    public boolean isEmpty() {
+        return tail == head;
+    }
+
+    public boolean isFull() {
+        return (tail + 1) % n == head;
     }
 
     public void printAll() {
